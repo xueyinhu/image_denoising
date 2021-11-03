@@ -3,7 +3,7 @@ from tensorflow.python.keras import activations, initializers, regularizers, con
 from tensorflow.python.keras.layers import Conv2D
 
 
-class Conv2d_filter(Conv2D):
+class Conv2dFilter(Conv2D):
     def __init__(self,
                  filters,
                  kernel_size=(3, 3),
@@ -23,25 +23,24 @@ class Conv2d_filter(Conv2D):
     def build(self, input_shape):
         kernel_shape = self.kernel_size + (input_shape[-1], self.filters)
         mask = np.zeros(kernel_shape)
-        if self.filter_mode == 'q1':
+        if self.filter_mode == '01':
             mask[0, :-1] = 1
             mask[1, 0] = 1
-        elif self.filter_mode == 'q2':
+        elif self.filter_mode == '02':
             mask[0, :] = 1
             mask[1, :-1] = 1
             mask[2, 0] = 1
-        elif self.filter_mode == 'e1':
+        elif self.filter_mode == '11':
             mask[0, 1:] = 1
             mask[1, -1] = 1
-        elif self.filter_mode == 'e2':
+        elif self.filter_mode == '12':
             mask[0, :] = 1
             mask[1, 1:] = 1
             mask[2, -1] = 1
-        elif self.filter_mode == 'd1':
+        elif self.filter_mode == '21':
             mask[-1, :] = 1
-        elif self.filter_mode == 'd2':
+        elif self.filter_mode == '22':
             mask[1:, :] = 1
-        print(mask)
         self.mask = backend.variable(mask)
         self.kernel = self.add_weight(
             shape=kernel_shape,
