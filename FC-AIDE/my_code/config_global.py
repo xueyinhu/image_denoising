@@ -3,6 +3,8 @@ import argparse
 parser_global = argparse.ArgumentParser()
 parser_global.add_argument('--input_size', default=(320, 320, 3))
 
+parser_global.add_argument('--data_dir', default='./my_code/data/')
+
 parser_global.add_argument('--model_making_parser', default=[[64, 1, 1, 0], *[[64, 2, i+2, 1] for i in range(21)]])
 parser_global.add_argument('--model_making_aa_out_channel', default=128)
 parser_global.add_argument('--model_making_parser_other', default=[[128, ], [128, ]])

@@ -15,7 +15,7 @@ def helper_for_making(opt, value, parse):
             value[i] = eval(eval(opt.model_making_str_template_4))
         value[i] = eval(eval(opt.model_making_str_template_1))
     avg = eval(eval(opt.model_making_str_template_2))
-    avg_1by1 = eval(eval(opt.model_making_str_template_3))
+    avg_1by1 = making_residual(opt, avg, parse)
     return value, avg_1by1
 
 
@@ -45,6 +45,3 @@ def make_model(opt):
     net.compile(loss=loss, optimizer=opti)
 
     return net
-
-
-print(make_model(parser_global))
